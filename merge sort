@@ -1,59 +1,84 @@
-#include <bits/stdc++.h>
+/*
+This algorithm is for merge sort for two-dimensional arrays. sorting the array with respect to selected parameters as in this example you can choose either x or y to sort your array by:
+arr[3][3]={{x1,y1,z1},{x2,y2,z2},{x3,y3,z3}}
+*****array[3][3]={{2,4,0},{-1,5,1},{9,2,2}};*****
+Sort with X parameter: array[3][3]={{-1,5,1},{2,4,0},{9,2,2}};
+ Sort with Y parameter: array[3][3]={{9,2,2},{2,4,0},{-1,5,1}};
+ Sort with Z parameter: array[3][3]={{2,4,0},{-1,5,1},{9,2,2}};
 
+*/
+#include <bits/stdc++.h>
 using namespace std;
 
-void merg (int a[],int l,int mid,int r)
+void merg (int a[][3],int l,int mid,int r,int level,int dimension)
 {
 
      int n1 = mid - l + 1,n2 = r-mid;
-   int * left=new int[n1],
-       * right=new int [n2];
+     int ** left=new int*[n1],
+         ** right=new int*[n2];
+       for(int i=0;i<n1;i++)
+            left[i]=new int [dimension];
+       for(int i=0;i<n2;i++)
+            right[i]=new int [dimension];
 
-   for (int i = 0; i < n1; i++)
-        left[i] = a[l + i];
-    for (int j = 0; j < n2; j++)
-        right[j] = a[mid + 1 + j];
+     for (int i = 0; i < n1; i++)
+      for(int j=0;j<dimension;j++)
+        left[i][j] = a[l + i][j];
+
+     for (int i = 0; i< n2; i++)
+      for(int j=0;j<dimension;j++)
+        right[i][j] = a[mid + 1 + i][j];
+
+
 int i=0,k=l,j=0;
 
    while(i<n1&&j<n2)
    {
-    if(left[i]<=right[j])
+    if(left[i][level]<=right[j][level])
     {
-        a[k]=left[i];
+       for(int ite=0;ite<dimension;ite++)
+        a[k][ite]=left[i][ite];
         i++;
     }
     else
     {
-        a[k]=right[j];
+       for(int ite=0;ite<dimension;ite++)
+        a[k][ite]=right[j][ite];
         j++;
     }
     k++;
    }
     while (i < n1)
   {
-    a[k] = left[i];
+   for(int ite=0;ite<dimension;ite++)
+    a[k][ite] = left[i][ite];
     i++;
     k++;
   }
 
   while (j < n2) {
-    a[k] = right[j];
+   for(int ite=0;ite<dimension;ite++)
+    a[k][ite] = right[j][ite];
     j++;
     k++;
   }
-delete [] left;
-delete [] right;
+  for(int i=0;i<n1;i++)
+            delete left[i];
+delete left;
+for(int i=0;i<n2;i++)
+            delete right[i];
+delete right;
 
 }
 
-void mergesort(int arr[],int l,int r)
+void mergesort(int arr[][3],int l,int r,int level,int dimension)
 {
    if(l<r)
    {
     int mid =l+(r-l)/2;
-    mergesort(arr,l,mid);
-    mergesort(arr,mid+1,r);
-    merg(arr,l,mid,r);
+    mergesort(arr,l,mid,level,dimension);
+    mergesort(arr,mid+1,r,level,dimension);
+    merg(arr,l,mid,r,level,dimension);
 
    }
 
@@ -64,11 +89,16 @@ void mergesort(int arr[],int l,int r)
 
 int main()
 {
-   int sr[]={10,-1,5,2,4,9};
-   mergesort(sr,0,5);
-   for(int i=0;i<6;i++)
+    int d=3,level;
+    cin>>level;         //level is related to the parameters ** level=0 in this case =>x**
+    level%=d;
+   int sr[][3]={{2,4,0},{-1,5,1},{9,2,2}};
+   mergesort(sr,0,2,level,d);
+   for(int i=0;i<3;i++)
    {
-       cout<<sr[i]<<endl;
+       for(int j=0;j<d;j++)
+       cout<<sr[i][j]<<"  ";
+   cout<<endl;
    }
 
 
