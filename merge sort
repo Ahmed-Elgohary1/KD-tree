@@ -41,7 +41,8 @@ int i=0,k=l,j=0;
     j++;
     k++;
   }
-
+delete [] left;
+delete [] right;
 
 }
 
