@@ -1,31 +1,49 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int arr[]={9,1,3,4,5,6,7,8,0};
-
-
-void constr(int l,int r,vector<int>&node)
+class node
 {
-    if(l>r)
-    {
-        return;
-    }
-        sort(arr, arr+9);
+    public:
+        int x;
+        node*left,*right;
+};
+
+
+void constr(int arr[],int l,int r,node* parent)
+{
+   
+        sort(arr+l, arr+r+1);
     int mid =(r+l)/2;
-    node.push_back(arr[mid]);
-    constr(l,mid-1,node);
-    constr(mid+1,r,node);
+    parent->x=arr[mid];
+
+    if(l<=mid-1)
+    {
+        parent->left=new node();
+    constr(arr,l,mid-1,parent->left);
+    }
+     if(mid+1<=r)
+    {
+        parent->right=new node();
+    constr(arr,mid+1,r,parent->right);
+
+    }
+}
+void print(node*head)
+{
+    if(head==NULL)return;
+    cout<<head->x<<"  ";
+    print(head->left);
+
+    print(head->right);
 
 }
 
 
-
 int main()
 {
-    vector<int>node;
-        constr(0,8,node);
+    int arr[]={9,1,3,4,5,6,7,8,0};
 
-   for(int i=0;i<9;i++)
-        cout<<node[i]<<"  ";
-
+    node* head=new node();
+        constr(arr,0,8,head);
+print (head);
 }
