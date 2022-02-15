@@ -1,37 +1,65 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 class node
 {
     public:
-        int x;
+        int x,y;
         node*left,*right;
 };
 
 
-void constr(int arr[],int l,int r,node* parent)
-{
-   
-        sort(arr+l, arr+r+1);
-    int mid =(r+l)/2;
-    parent->x=arr[mid];
 
+// Merge sort  for array "a"
+void merg (int a[][2],int l,int mid,int r,int level,int dimension);
+void mergesort(int arr[][2],int l,int r,int level,int dimension);
+
+
+
+
+void constr(int points[][2],int l,int r,node* parent,int level)
+{
+      mergesort(points,l,r,level%2,2);
+
+
+    int mid =(r+l)/2;
+    parent->x=points[mid][0];
+    parent->y=points[mid][1];
+//cout<<level<<endl;
+if(r>=l)level++;
     if(l<=mid-1)
     {
         parent->left=new node();
-    constr(arr,l,mid-1,parent->left);
+    constr(points,l,mid-1,parent->left,level);
     }
      if(mid+1<=r)
     {
         parent->right=new node();
-    constr(arr,mid+1,r,parent->right);
+    constr(points,mid+1,r,parent->right,level);
 
     }
 }
+
+
+
+void print(node*head);
+
+
+int main()
+{
+
+    int points[][2]={{3, 6}, {17, 15}, {13, 15}, {6, 12}, {9, 1}, {2, 7}, {10, 19}};
+
+    node* head=new node();
+        constr(points,0,6,head,0);
+print (head);
+}
+
+
 void print(node*head)
 {
     if(head==NULL)return;
-    cout<<head->x<<"  ";
+    cout<<head->x<<"  "<<head->y<<endl;
     print(head->left);
 
     print(head->right);
@@ -39,11 +67,94 @@ void print(node*head)
 }
 
 
-int main()
-{
-    int arr[]={9,1,3,4,5,6,7,8,0};
 
-    node* head=new node();
-        constr(arr,0,8,head);
-print (head);
+
+// Merge two subarrays Left and right into array "a"
+void merg (int a[][2],int l,int mid,int r,int level,int dimension)
+{
+     int n1 = mid - l + 1,n2 = r-mid;
+
+ // Create Left ← a[l..mid] and right ← a[mid+1..r]
+     int ** left=new int*[n1],
+         ** right=new int*[n2];
+       for(int i=0;i<n1;i++)
+            left[i]=new int [dimension];
+       for(int i=0;i<n2;i++)
+            right[i]=new int [dimension];
+
+     for (int i = 0; i < n1; i++)
+      for(int j=0;j<dimension;j++)
+        left[i][j] = a[l + i][j];
+
+     for (int i = 0; i< n2; i++)
+      for(int j=0;j<dimension;j++)
+        right[i][j] = a[mid + 1 + i][j];
+
+  // Maintain current index of sub-arrays and main array
+int i=0,k=l,j=0;
+// Until we reach either end of either Left or right , pick larger among
+  // elements Left and right and place them in the correct position at A[l..r]
+   while(i<n1&&j<n2)
+   {
+    if(left[i][level]<=right[j][level])
+    {
+       for(int ite=0;ite<dimension;ite++)
+        a[k][ite]=left[i][ite];
+        i++;
+    }
+    else
+    {
+       for(int ite=0;ite<dimension;ite++)
+        a[k][ite]=right[j][ite];
+        j++;
+    }
+    k++;
+   }
+
+// When we run out of elements in either Left or right,
+  // pick up the remaining elements and put in A[l..r]
+while (i < n1)
+  {
+   for(int ite=0;ite<dimension;ite++)
+    a[k][ite] = left[i][ite];
+    i++;
+    k++;
+  }
+
+  while (j < n2) {
+   for(int ite=0;ite<dimension;ite++)
+    a[k][ite] = right[j][ite];
+    j++;
+    k++;
+  }
+
+
+
+//demolish the temporary containers left and right
+for(int i=0;i<n1;i++)
+            delete left[i];
+delete left;
+for(int i=0;i<n2;i++)
+            delete right[i];
+delete right;
+
 }
+
+
+
+// Divide the array into two subarrays, sort them and merge them
+void mergesort(int arr[][2],int l,int r,int level,int dimension)
+{
+   if(l<r)
+   {
+       // mid is the point where the array is divided into two subarrays
+    int mid =l+(r-l)/2;
+    mergesort(arr,l,mid,level,dimension);
+    mergesort(arr,mid+1,r,level,dimension);
+        // Merge the sorted subarrays
+    merg(arr,l,mid,r,level,dimension);
+
+   }
+
+}
+
