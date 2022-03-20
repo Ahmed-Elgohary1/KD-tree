@@ -10,11 +10,22 @@ So the backbone of the algorithm is sorting. As a result to improve our time com
 #### 2) search 
 It considered one of the most interesting methods in  the tree as it has same time complexity of binary search tree which is O(log n).
 We have optained that Time complexity by having balanced tree.so we have constructed the tree by the way shown previous.
+
 #### 3) insertion
 After we have constructed our tree we wanted to insert a point.
 That tree is not as red-black tree self balancing tree.so to guarantee our tree still balanced we search a point need to insert,then we extend a children
 From the last traversed node .
 
+#### 4) the nearest neighbor (NN) search
+the most interesting operation provided by k-d trees, the
+nearest neighbor (NN) search.
+
+k-d tree, much like a sorted array, has structural information about the
+relative distance and position of its elements, and we can leverage that information to
+perform our search more efficiently.
+
+the average running time for nearest neighbor search on a balanced
+k-d tree is O(2**k + log(n)) : k is number of dimensions, n is number of points.
 ## Referances
 An interesting paper helped me to improve algorithm efficiency 
 
