@@ -26,6 +26,18 @@ perform our search more efficiently.
 
 the average running time for nearest neighbor search on a balanced
 k-d tree is O(2**k + log(n)) : k is number of dimensions, n is number of points.
+
+#### 5)Region search
+ If that distance between our Target and surrounding points in our dataset is lower than or equal to the search region’s
+radius, it means that there is still an area of intersection between that branch and the search region, and so we need to traverse the branch; otherwise, we can prune it.
+
+![image](https://user-images.githubusercontent.com/67281513/159442810-0a52fbae-3268-49bb-9064-2792509a27ed.png)
+
+
+
+
+
+
 ## Referances
 An interesting paper helped me to improve algorithm efficiency 
 
