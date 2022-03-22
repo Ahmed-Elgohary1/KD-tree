@@ -1,5 +1,5 @@
 ## kd tree
-In this repository we implement kd tree with efficient time complexity and interesting methods, which we will discuss below 👇
+In this repository we are implementing kd tree with efficient time complexity and interesting methods, which we will discuss below 👇
 
 #### 1) construction of the tree 
 To construct the tree we divide our domain in each level and choose the middle point to split the new domain.
