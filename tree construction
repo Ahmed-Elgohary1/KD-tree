@@ -1,11 +1,12 @@
 #include<iostream>
 #include<cmath>
+#include<vector>
 using namespace std;
 
 class point
 {
 public:
-    int x, y;
+    double x, y;
 };
 
 class node:public point
@@ -153,6 +154,40 @@ nn nearestNeighbor(node* CurrentNode, point Target, nn NearestNode,int level)
     return NearestNode;
 }
 
+void NeighborsInRange(node* CurrentNode, point Target,double raduis, vector<point>& SurroundingPoints, int level)
+{
+    node* CloseBranch, * FarBranch;
+    point Surrounded{};
+    if (CurrentNode == NULL)
+        return;
+    
+    else
+    {
+        double dist = distance(CurrentNode, Target);
+        Surrounded.x = CurrentNode->x; Surrounded.y = CurrentNode->y;
+        if (dist < raduis)
+        {
+            
+            SurroundingPoints.push_back(Surrounded);
+        }
+   
+        if (compare(CurrentNode, Target, level % 2) < 0)
+        {
+            CloseBranch = CurrentNode->left;
+            FarBranch = CurrentNode->right;
+        }
+        else
+        {
+            CloseBranch = CurrentNode->right;
+            FarBranch = CurrentNode->left;
+        }
+        NeighborsInRange(CloseBranch, Target,raduis,SurroundingPoints, ++level);
+        if (SplitDist(CurrentNode, Target, level % 2) < raduis)
+            NeighborsInRange(FarBranch, Target, raduis,SurroundingPoints, ++level);
+
+    }
+    return ;
+}
 
 
 
@@ -172,15 +207,20 @@ int main()
    nearstnode.x = 30000;nearstnode.y = 30000;
 
     constr(points, 0, 6, head, 0);
-    inserting(head, -1, 15);
-    //inserting(head, 2, -3);
-    //cout<<searching(head,-1,15);
+    /*inserting(head, -1, 15);
+    cout<<searching(head,-1,15);*/
+    vector<point>SurroundingPoints, solution;
+
     point targ{};
     targ.x = 14;
     targ.y = 15;
-    pop=nearestNeighbor(head,targ , nearstnode, 0);
+    /*NeighborsInRange(head, targ, 10, SurroundingPoints, 0);
+    for (int i = 0; i < SurroundingPoints.size(); i++)
+        cout << SurroundingPoints[i].x << "  " << SurroundingPoints[i].y << endl;*/
+
+    //pop=nearestNeighbor(head,targ , nearstnode, 0);
     //cout << pop.x<<"  "<<pop.y;
-    print(head);
+    //print(head);
 }
 
 //print the tree by traversing it in preorder.
