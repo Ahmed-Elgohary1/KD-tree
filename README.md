@@ -3,7 +3,7 @@ In this repository we are implementing kd tree with efficient time complexity an
 
 #### 1) construction of the tree 
 To construct the tree we divide our domain in each level and choose the middle point to split the new domain.
-So the backbone of the algorithm is sorting. As a result to improve our time complexity efficiency, We use merge sort to have complexity of O(K n log n).
+So the backbone of the algorithm is sorting. As a result to improve our time complexity efficiency, We use merge sort to have complexity of O(K n log n).🦄🦄
    ![image](https://user-images.githubusercontent.com/67281513/158078588-44d8930c-712e-4b83-8fe0-6bfbcf88488c.png)
 
 
@@ -16,7 +16,7 @@ After we have constructed our tree we wanted to insert a point.
 That tree is not as red-black tree self balancing tree.so to guarantee our tree still balanced we search a point need to insert,then we extend a children
 From the last traversed node .
 
-#### 4) the nearest neighbor (NN) search
+#### 4) the nearest neighbor (NN) search🦄
 the most interesting operation provided by k-d trees, the
 nearest neighbor (NN) search.
 
