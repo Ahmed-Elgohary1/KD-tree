@@ -47,7 +47,7 @@ Russell A. Brown :Building a Balanced k-d Tree in O(kn log n) Time. Journal of C
 
 I have made an open discussion about kd tree
 
-1)Talking about the algorithm of that data structure and what problem has been solved by using that DS [https://drive.google.com/file/d/1vvEwUNimux1wrepcEbxDQ1a8Xyr5hniv/view?usp=sharing]
+1)Talking about the algorithm of that data structure and what problem has been solved by using that DS [https://www.youtube.com/watch?v=H0ViOzQGYaA]
 
-2)Talking about Algorithm insights and some methods{construction,search,insertion} [https://drive.google.com/file/d/1AhomqTLPO6xb35fBthFaT3mPR4hmdVAQ/view?usp=sharing]
+2)Talking about Algorithm insights and some methods{construction,search,insertion} [https://www.youtube.com/watch?v=QrLQm0F9jTM]
 
