@@ -35,7 +35,7 @@ radius, it means that there is still an area of intersection between that branch
 
 
 
-
+ See https://dev.to/ahmedelgohary1/k-d-trees-3k3h for a more elaborate documentation
 
 
 ## Referances
