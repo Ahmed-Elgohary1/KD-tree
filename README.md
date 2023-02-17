@@ -1,6 +1,9 @@
 ## kd tree
 In this repository we are implementing kd tree with efficient time complexity and interesting methods, which we will discuss below 👇
 
+ ### *See* https://dev.to/ahmedelgohary1/k-d-trees-3k3h  *for a more elaborate documentation*
+
+
 #### 1) construction of the tree 
 To construct the tree we divide our domain in each level and choose the middle point to split the new domain.
 So the backbone of the algorithm is sorting. As a result to improve our time complexity efficiency, We use merge sort to have complexity of O(K n log n).🦄🦄
@@ -35,7 +38,6 @@ radius, it means that there is still an area of intersection between that branch
 
 
 
- See https://dev.to/ahmedelgohary1/k-d-trees-3k3h for a more elaborate documentation
 
 
 ## Referances
